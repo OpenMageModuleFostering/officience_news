@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Officience_News>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Officience_News>
+    </modules>
+</config> 

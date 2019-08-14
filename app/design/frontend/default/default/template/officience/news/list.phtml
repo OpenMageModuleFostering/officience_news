@@ -1,0 +1,90 @@
+<h2><?php echo $this->__(Mage::getStoreConfig('news/news/title')) ?>
+    <?php if (Mage::helper('offinews')->getRssEnable()): ?>
+        <?php if ($this->getCurrentCategory()): ?>
+            <a href="<?php echo $this->getUrlRss() ?>" target="_blank">
+                <img src="<?php echo $this->getSkinUrl('css/officience/news/images/rss.gif') ?>">
+            </a>
+        <?php endif; ?>
+    <?php endif ?>
+</h2>
+<?php if ((Mage::helper('offinews')->getparentcategorydisplaysetting() == '2' && !$this->getCurrentCategory()) || ($this->getCurrentCategory() && $this->getCurrentCategory()->getDisplaySetting() == '1')): ?>
+    <?php $items = $this->getSubCategory() ?>
+    <?php if (count($items->getData()) < 1): ?>
+        <div>Sorry not found item</div>
+    <?php else: ?>
+        <div class="post listing-type-list">
+            <div class="post-listing">
+                <ul>
+                    <?php
+                    foreach ($items as $item):
+                        ?>
+
+                        <li>
+                            <span></span>
+                                <?php if ($item->getThumbnail()) { ?>
+                                    <a href="<?php echo $item->getUrl(); ?>" title="<?php echo $item->getTitle(); ?>" />
+                                    <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $item->getThumbnail(); ?>" alt="<?php echo $item->getTitle(); ?>" />
+                                    </a>
+                                <?php } ?>	
+                                <h2>
+                                    <a href="<?php echo $item->getUrl(); ?>"><?php echo $item->getTitle(); ?></a>
+                                </h2>
+                        </li>
+                        <?php
+                    endforeach;
+                    ?> 
+                </ul>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php else: ?>
+    <?php $items = $this->getNewsPost() ?>
+    <?php if (!$items->getData()): ?>
+        <div>Sorry not found item</div>
+    <?php else: ?>
+
+        <div class="post listing-type-list">
+            <div class="post-listing">
+                <?php
+                foreach ($items as $item):
+                    ?>
+
+                    <div class="post-item">
+                        <?php if ($item->getThumbnail()) { ?>
+                            <a href="<?php echo $item->getUrl(); ?>" title="<?php echo $item->getTitle(); ?>" />
+                            <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $item->getThumbnail(); ?>" alt="<?php echo $item->getTitle(); ?>" />
+                            </a>
+                        <?php } ?>	
+                        <div class="post-item-top">
+                            <?php if (Mage::helper('offinews')->showDate()): ?>
+                                <span class="date"><?php echo Mage::helper('offinews')->formatDate($item->getNewsTime()) ?></span>
+                            <?php endif; ?>
+                            <?php if ($item->getAuthor()): ?>
+                                <span class="author">&nbsp;<?php if (Mage::helper('offinews')->showAuthor()): ?>By :&nbsp; <?php echo $item->getAuthor() ?><?php endif; ?></span>
+                            <?php endif; ?>
+                            <?php if ($item->getCommentsEnabled()): ?>
+                                <a href="<?php echo $item->getUrl() ?>#commentBox" class="comment"><?php echo $item->getCommentsCount(); ?> <?php echo $this->__('Comment(s)') ?></a>
+                            <?php endif; ?>
+                        </div>
+                        <div class="post-title">
+                            <a href="<?php echo $item->getUrl(); ?>"><?php echo $item->getTitle(); ?></a>
+                        </div>
+                        <div class="post-desc"> 
+                            <?php echo $item->getDescription(); ?>
+                            <?php if (Mage::helper('offinews')->enableLinkRoute()): ?>
+                                <?php if ($link = Mage::helper('offinews')->getLinkRoute()): ?>
+                                    <a href="<?php echo $item->getUrl($this->getCategory()) ?>" class="more"><?php echo $link . '&raquo;'; ?></a>
+                                <?php else: ?>
+                                    <a href="<?php echo $item->getUrl($this->getCategory()) ?>" class="more"><?php echo Mage::helper('offinews')->getLinkRoute() . '&raquo;'; ?></a>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div> 
+                    </div>
+                    <?php
+                endforeach;
+                ?> 
+                <?php echo $this->getPages(); ?>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,118 @@
+.post-list{
+    clear:both;
+    padding-bottom:20px;
+}
+.post-listing .post-item {
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 27px;
+    width: 46%;
+}
+
+
+.post-listing .post-item .post-desc p {
+    margin: 0 0 5px;
+}
+
+.post-listing .post-item img,.post-listing li img  {
+    height: 169px;
+    margin-bottom: 10px;
+    width: 330px;
+}
+.post-listing img {
+    border: 3px solid #FFFFFF;
+    box-shadow: 2px 2px 3px #E1EBEE;
+}
+.post-item-top span{
+    float:left;
+    margin-right: 20px;
+}
+
+.post-listing .post-item .post-title{
+    clear: both;
+}
+
+.copyright {
+    clear: both;
+}
+
+.comment-item {
+    margin:10px 0 0 0;
+}
+
+.comment-item .username {
+    font-size:12px;
+    margin:0px;
+    color:#1E7EC8;
+    display:inline;
+}
+#comment_block .comment-item div {
+    padding-left:10px;
+}
+
+#postComment label {
+    float:left;
+    width:80px;
+}
+#postComment .input-box {
+    padding-bottom:9px;
+}
+#postComment input[type="text"] {
+    width:200px;
+}
+.post-page-break{
+    clear:both;
+}
+
+.post-listing li {
+    float: left;
+    height: 169px;
+    margin-bottom: 25px;
+    margin-right: 8px;
+    position: relative;
+    width: 48%;
+}
+
+
+
+.post-listing li span {
+    background: none repeat scroll 0 0 #FFFFFF;
+    bottom: -3px;
+    display: block;
+    height: 43px;
+    left: 3px;
+    opacity: 0.85;
+    position: absolute;
+    width: 334px;
+}
+
+.post-listing li h2 {
+    background: url("images/arr_t.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    bottom: 5px;
+    left: 10px;
+    margin: 0;
+    padding-top: 16px;
+    position: absolute;
+}
+
+.post-listing li a {
+    color: #1E7EC8;
+    text-decoration: none;
+}
+
+.post-listing li h2 a:hover {
+    background: url("images/news-ct.png") no-repeat scroll left -25px rgba(0, 0, 0, 0);
+    color: #3A7695;
+}
+.post-listing li h2 a {
+    background: url("images/news-ct.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    color: #3B3B3B;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    height: 22px;
+    line-height: 24px;
+    margin-left: 7px;
+    padding-left: 29px;
+    text-transform: uppercase;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <default>
+        
+        <reference name="head">
+            <action method="addItem">
+                <type>js_css</type>
+                <name>officience/news/css/newscat.css</name>
+            </action>
+        </reference>
+
+    </default>
+    <offinews_adminhtml_category_edit>        
+        <reference name="left">
+            <block type="adminhtml/store_switcher" name="store_switcher" before="-"></block>            
+        </reference>
+        <reference name="js">            
+            <block type="core/template" name="catalog.wysiwyg.js" template="catalog/wysiwyg/js.phtml"/>
+        </reference>
+    </offinews_adminhtml_category_edit>
+    <offinews_adminhtml_news_edit>        
+        <reference name="left">
+            <block type="adminhtml/store_switcher" name="store_switcher" before="-"></block>            
+        </reference>
+        <reference name="js">            
+            <block type="core/template" name="catalog.wysiwyg.js" template="catalog/wysiwyg/js.phtml"/>
+        </reference>
+    </offinews_adminhtml_news_edit>
+</layout>

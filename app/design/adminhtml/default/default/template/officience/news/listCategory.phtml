@@ -1,0 +1,27 @@
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('offinews')->__('Category') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+        <input type="hidden" name="category_ids" id="product_categories" value="<?php echo $this->getIdsString() ?>">
+
+
+        <div class="tree x-tree">
+            <?php $listcategory = $this->getListMenuCatBlog(); ?>
+            <?php if ($listcategory): ?>
+                <ul  class="offinews-tree-root-ct">
+                    <div class="offinews-tree-root-node">
+                        <?php echo $listcategory; ?>
+                    </div>
+                </ul>
+            <?php else: ?>
+                error
+            <?php endif; ?>
+        </div>
+
+    </fieldset>
+
+
+</div>
+
+

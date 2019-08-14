@@ -1,0 +1,21 @@
+.offinews-node-leaf .offinews-node-icon{
+    border: 0 none;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    width: 16px;
+    background: url("images/folder.gif") no-repeat scroll 0 50% rgba(0, 0, 0, 0);
+}
+.offinews-tree-root-ct li.parent ul{
+    margin-left: 10px;
+}
+.offinews-tree-root-ct a span{
+    color: #000000;
+    padding: 1px 3px 1px 2px;
+
+}
+.offinews-tree-root-ct a,.offinews-tree-root-ct a:hover{
+    text-decoration: none;
+}
+

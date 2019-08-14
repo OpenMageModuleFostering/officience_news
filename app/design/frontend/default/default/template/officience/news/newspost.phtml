@@ -1,0 +1,111 @@
+<?php $item = $this->getNewsPost(); ?>
+<h3><?php echo $item->getTitle() ?></h3>
+<div class="post-item-top">
+    <?php if (Mage::helper('offinews')->showDate()): ?>
+        <span class="date"><?php echo $item->getTimePublic() ?></span>
+    <?php endif; ?>
+    <?php if (Mage::helper('offinews')->showAuthor()): ?>
+        <?php if ($item->getAuthor()): ?>
+            <span class="author">by &nbsp; <?php echo $item->getAuthor() ?></span>
+        <?php endif ?>
+    <?php endif; ?>
+    <?php if (Mage::helper('offinews')->getPrintEnable()): ?>
+        <div class="social">
+            <a href="<?php echo $item->getUrlPrint() ?>" class="print-btn"><?php echo $this->__('Print Version'); ?></a>
+        </div>
+    <?php endif; ?>
+</div>
+
+<div class="news">
+    <?php echo $this->contentFilter($item->getFullContent()); ?>
+</div>
+
+<p>
+    <?php if (Mage::helper('offinews')->getTagsAccess()): ?>
+        <?php if ($item->getTags()): ?>
+            <?php $arr = preg_split('/,/', $item->getTags()); ?>
+            <?php $tags = ''; ?>
+            <?php $count = count($arr); ?>
+            <?php $k = 1; ?>
+            <?php foreach ($arr as $val): ?>
+                <?php $valtag = str_replace(" ", '-', $val); ?>
+                <?php $tags .= '<a href="' . $this->getUrl(Mage::helper('offinews')->getRoute() . '/tag') . $valtag . Mage::helper('offinews')->getNewsitemUrlSuffix() . '" >' . $val . '</a> '; ?>
+                <?php if ($k != $count): ?>
+                    <?php $tags .= ', '; ?>
+                <?php endif; ?>
+                <?php $k++; ?>
+            <?php endforeach; ?>
+            <img src="<?php echo $this->getSkinUrl('css/offinews/images/i-tags.gif') ?>"/>&nbsp;<?php echo $tags; ?>
+        <?php endif; ?>
+    <?php endif; ?>
+</p>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+
+<div class="news-item-comment">
+
+    <?php if ($item->getCommentsEnabled()): ?>
+        <?php $comments = $this->getComments(); ?>
+        <div>
+            <a name="commentBox" ></a>
+            <h2><?php echo $this->getCommentTotalString($comments); ?></h2>
+        </div>
+        <div id="clloader" style="display:none;"><img src="<?php echo $this->getSkinUrl('images/offinews/ajax-loader.gif') ?>"/></div>
+        <div id="comment_block">
+            <?php $k = 0; ?>
+            <?php foreach ($comments as $comment): ?>
+                <div id="comment_item_<?php echo $k; ?>" class="comment-item">
+                    <h4 class="username"><?php echo $comment->getUser(); ?></h4>
+                    <?php echo $this->__("posted on") ?> <?php echo Mage::helper('offinews')->formatDate($comment->getCreatedTime()); ?>
+                    <div><?php echo $comment->getComment(); ?></div>
+                </div>
+                <?php $k++; ?>
+            <?php endforeach; ?>
+        </div>
+        <?php //if (!Mage::helper('offinews')->getRequireLogin() || (Mage::helper('offinews')->getRequireLogin() && $this->helper('customer')->isLoggedIn())): ?>
+        <form id="postComment" method="post" action="">
+            <h4><?php echo Mage::helper('offinews')->__('Comment') ?></h4>
+            <ul>
+                <li>
+                    <?php if (!Mage::helper('customer')->isLoggedIn()): ?>
+                        <div class="input-box">
+                            <label for="name"><?php echo Mage::helper('offinews')->__('Name') ?> <span class="required">*</span></label>
+                            <input name="user" id="user" value="<?php echo $this->getCommentName(); ?>" title="<?php echo $this->__('Name') ?>" value="<?php echo $this->htmlEscape($this->helper('offinews')->getUserName()) ?>" class="required-entry input-text" type="text" />
+                        </div>
+                        <div class="clear"></div>
+
+                        <div class="input-box">
+                            <label for="email"><?php echo Mage::helper('offinews')->__('Email') ?> <span class="required">*</span></label>
+                            <input name="email" id="email" value="<?php echo $this->getCommentEmail(); ?>" title="<?php echo $this->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('offinews')->getUserEmail()) ?>" class="required-entry input-text validate-email" type="text" />
+                        </div>
+                    <?php else: ?>
+                        <input name="email" type="hidden" value="<?php echo $this->htmlEscape(Mage::helper('offinews')->getUserEmail()) ?>"/><br/>
+                        <input name="user" type="hidden" value="<?php echo $this->htmlEscape(Mage::helper('offinews')->getUserName()) ?>"/><br/>
+                    <?php endif ?>
+                    <div class="clear"></div>
+                    <div class="input-box">
+                        <label for="comment"><?php echo Mage::helper('offinews')->__('Comment') ?> <span class="required">*</span></label>
+                        <textarea name="comment" id="comment" title="<?php echo Mage::helper('offinews')->__('Comment') ?>" class="required-entry input-text" style="height:150px;width:400px;" cols="50" rows="5"><?php echo $this->getCommentText(); ?></textarea>
+                    </div>
+                </li>
+                <?php if (Mage::helper('offinews')->getCaptchaEnable()): ?>
+                    <!-- - -->
+                <?php endif ?>
+                </li>
+            </ul>
+            <div class="button-set">
+                <input name="news_id" type="hidden" value="<?php echo $item->getId() ?>" />
+                <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+                <button class="button" type="submit"><span><span><?php echo Mage::helper('offinews')->__('Submit Comment') ?></span></span></button>
+            </div>
+        </form>
+
+        <script type="text/javascript">
+            var contactForm = new VarienForm('postComment', false);
+        </script>
+    <?php else: ?>
+        <p><?php echo Mage::helper('offinews')->__('You must be logged in to post a comment.'); ?></p>
+        <p><a href="<?php echo Mage::helper('customer')->getLoginUrl(); ?>"><?php echo Mage::helper('offinews')->__('click here'); ?></a> <?php echo Mage::helper('offinews')->__('to log in'); ?></p>
+    <?php endif; ?>
+    <?php //endif; ?>
+</div>
