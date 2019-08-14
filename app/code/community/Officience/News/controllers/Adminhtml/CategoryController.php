@@ -99,6 +99,11 @@ class Officience_News_Adminhtml_CategoryController extends Mage_Adminhtml_Contro
             $store = intval($this->getRequest()->getParam('store', 0));
             if ($store != 0 && $this->getRequest()->getPost('category_id')) {
                 $datatemp = $this->getRequest()->getPost();
+                if (!$datatemp['identifier']) {
+                    $datatemp['identifier'] = Mage::helper('offinews')->vnFilter($datatemp['title']);
+                } else {
+                    $datatemp['identifier'] = Mage::helper('offinews')->vnFilter($datatemp['identifier']);
+                }
                 // try {
                 $id = $this->getRequest()->getPost('category_id');
                 $str = Mage::getModel('offinews/category')->getDefaultValue($datatemp['category_id'], $store);

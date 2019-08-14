@@ -9,6 +9,7 @@ class Officience_News_Block_Abstract extends Mage_Core_Block_Template {
     protected $_pages;
     protected $_latestItemsCount = 2;
     protected $_showFlag = 0;
+    protected $_sizeCollection = 0;
 
     protected function _construct() {
         $this->_currentPage = $this->getRequest()->getParam('page');
@@ -56,6 +57,7 @@ class Officience_News_Block_Abstract extends Mage_Core_Block_Template {
                 ->addEnableFilter(1)
                 ->addStoreFilter($storeId)
                 ->addStoreEnableFilter(1);
+        $this->_sizeCollection = $collection->getSize();
         if ($this->_itemsLimit != null && $this->_itemsLimit < $collection->getSize()) {
             $this->_pagesCount = ceil($this->_itemsLimit / $this->_itemsOnPage);
         } else {
@@ -110,14 +112,17 @@ class Officience_News_Block_Abstract extends Mage_Core_Block_Template {
             }
         }
         $currentPage = (int) $this->getRequest()->getParam('page');
-        $links = "<div class='post-page-break'>";
-        if ($currentPage > 1) {
-            $links .= '<div class="left"><a href="' . $url . ($this->_currentPage - 1) . '" >< Newer Posts</a></div>';
+        $links = '';
+        if ($this->_itemsOnPage < $this->_sizeCollection) {
+            $links .= "<div class='post-page-break'>";
+            if ($currentPage > 1) {
+                $links .= '<div class="left"><a href="' . $url . ($this->_currentPage - 1) . '" >< Newer Posts</a></div>';
+            }
+            if ($currentPage < $this->_pagesCount || $currentPage == 1) {
+                $links .= '<div class="right"><a href="' . $url . ($this->_currentPage + 1) . '" >Older Posts ></a></div>';
+            }
+            $links .= "</div>";
         }
-        if ($currentPage < $this->_pagesCount || $currentPage == 1) {
-            $links .= '<div class="right"><a href="' . $url . ($this->_currentPage + 1) . '" >Older Posts ></a></div>';
-        }
-        $links .= "</div>";
 
         echo $links;
         //}

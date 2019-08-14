@@ -27,9 +27,9 @@ class Officience_News_Block_Adminhtml_Category_Edit extends Mage_Adminhtml_Block
 
     public function getHeaderText() {
         if (Mage::registry('cat_data') && Mage::registry('cat_data')->getId()) {
-            return $this->__("Edit News Category '%s'", $this->htmlEscape(Mage::registry('cat_data')->getTitle()));
+            return $this->__("Edit New Category '%s'", $this->htmlEscape(Mage::registry('cat_data')->getTitle()));
         } else {
-            return $this->__('Add News Category');
+            return $this->__('Add New Category');
         }
     }
 

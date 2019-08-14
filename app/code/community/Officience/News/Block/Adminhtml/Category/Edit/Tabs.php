@@ -6,7 +6,7 @@ class Officience_News_Block_Adminhtml_Category_Edit_Tabs extends Mage_Adminhtml_
         parent::_construct();
         $this->setId('news_tabs');
         $this->setDestElementId('edit_form');
-        $this->setTitle($this->__('News'));
+        $this->setTitle($this->__('Category'));
     }
 
     protected function _beforeToHtml() {

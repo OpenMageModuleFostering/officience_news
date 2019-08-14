@@ -23,7 +23,7 @@ class Officience_News_Model_Mysql4_News extends Mage_Core_Model_Mysql4_Abstract 
                 );
                 $defaultValueArr = Mage::helper('offinews')->getDefaultValueData($data[0]);
                 foreach ($defaultValueArr as $key => $defaultData) {
-                    if ($defaultData) {
+                    if ($defaultData && $key != 'default_value') {
                         $arrValue[$key] = $object->getData($key);
                     }
                 }

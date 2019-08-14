@@ -117,7 +117,11 @@ class Officience_News_Adminhtml_NewsController extends Mage_Adminhtml_Controller
             if ($store != 0 && $id) {
 
                 $datatemp = $this->getRequest()->getPost();
-
+                if (!$datatemp['identifier']) {
+                    $datatemp['identifier'] = Mage::helper('offinews')->vnFilter($datatemp['title']);
+                } else {
+                    $datatemp['identifier'] = Mage::helper('offinews')->vnFilter($datatemp['identifier']);
+                }
                 $newsCollection = Mage::getModel('offinews/newsStore')->getCollection()
                         ->addFieldToFilter('identifier', $datatemp['identifier']);
 
@@ -163,6 +167,7 @@ class Officience_News_Adminhtml_NewsController extends Mage_Adminhtml_Controller
                 unset($dataCur['thumbnail']);
 
                 $dataCur['default_value'] = Mage::helper('offinews')->renderDefaultToText($datatemp);
+                $dataCur['update_time'] = now();
                 Mage::getModel('offinews/newsStore')->deleteNewsStore($id, $store);
 
 
@@ -196,6 +201,11 @@ class Officience_News_Adminhtml_NewsController extends Mage_Adminhtml_Controller
                 }
             } else {
                 $data = $this->getRequest()->getPost();
+                if (!$data['identifier']) {
+                    $data['identifier'] = Mage::helper('offinews')->vnFilter($data['title']);
+                } else {
+                    $data['identifier'] = Mage::helper('offinews')->vnFilter($data['identifier']);
+                }
                 $newsCollection = Mage::getModel('offinews/news')->getCollection()
                         ->addFieldToFilter('identifier', $data['identifier']);
                 $arr = array();
@@ -248,13 +258,13 @@ class Officience_News_Adminhtml_NewsController extends Mage_Adminhtml_Controller
 
                     $model = Mage::getModel('offinews/news');
                     /*
-                    $dateFrom = $this->getRequest()->getParam('publicate_from_date');
-                    $dateTo = $this->getRequest()->getParam('publicate_to_date');
-                    $timeFrom = implode(',', $this->getRequest()->getParam('publicate_from_time'));
-                    $timeTo = implode(',', $this->getRequest()->getParam('publicate_to_time'));
+                      $dateFrom = $this->getRequest()->getParam('publicate_from_date');
+                      $dateTo = $this->getRequest()->getParam('publicate_to_date');
+                      $timeFrom = implode(',', $this->getRequest()->getParam('publicate_from_time'));
+                      $timeTo = implode(',', $this->getRequest()->getParam('publicate_to_time'));
 
-                    $data['publicate_from_time'] = $timeFrom;
-                    $data['publicate_to_time'] = $timeTo;
+                      $data['publicate_from_time'] = $timeFrom;
+                      $data['publicate_to_time'] = $timeTo;
                      * 
                      */
                     $data['tags'] = $this->getRequest()->getParam('tags');
@@ -278,12 +288,12 @@ class Officience_News_Adminhtml_NewsController extends Mage_Adminhtml_Controller
 //                    } else {
 //                        $data['publicate_to_date'] = new Zend_Db_Expr('null');
 //                    }
-//                    if ($id) {
-//                        $data['update_time'] = now();
-//                    } else {
-//                        $data['created_time'] = now();
-//                        $data['update_time'] = now();
-//                    }
+                    if ($id) {
+                        $data['update_time'] = now();
+                    } else {
+                        $data['created_time'] = now();
+                        $data['update_time'] = now();
+                    }
 
                     if ($this->getRequest()->getParam('author') == NULL) {
                         $model->setUpdateAuthor(NULL);

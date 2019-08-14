@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Officience_News>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </Officience_News>
     </modules>
     <admin>
