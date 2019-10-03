@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Officience_News",
+    "name": "OpenMageModuleFostering\/Officience_News",
     "type": "magento-module",
     "license": "OSL",
     "homepage": "",
     "description": "This free Magento News Extenion allows you to manage news on your website by store view",
     "authors": [
-    {
-        "name": "khanh trieu nguyen le",
-        "email": "trieu181989@gmail.com"
-    }
-],
+        {
+            "name": "khanh trieu nguyen le",
+            "email": "trieu181989@gmail.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
