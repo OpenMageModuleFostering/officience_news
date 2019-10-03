@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/Officience_News",
+    "name": "openmage-module-fostering\/officience_news",
     "type": "magento-module",
-    "license": "OSL",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "This free Magento News Extenion allows you to manage news on your website by store view",
     "authors": [

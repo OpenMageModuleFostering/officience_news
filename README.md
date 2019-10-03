@@ -1,3 +1,5 @@
+
+
 ## Original Package Description
 
 This free Magento News Extenion allows you to manage news on your website by store view
